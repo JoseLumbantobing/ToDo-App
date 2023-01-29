@@ -19,6 +19,7 @@ h1 {
 }
 
 form {
+    box-shadow: 0 4px 10px rgba(0, 0, 0, .4);
     margin: auto;
     max-width: 100%;
     width: 500px;
@@ -26,6 +27,7 @@ form {
 
 .input {
     border: none;
+    border-bottom: 1px solid #e5e5e5;
     font-size: 1.5rem;
     padding: 1rem 2rem;
     display: block;
@@ -38,12 +40,13 @@ form {
 
 .todo-list {
     list-style-type: none;
-    margin-top: 5px;
+    margin: 0;
     padding: 0;
 }
 
 .todo-list li {
     background-color: #fff;
+    border-top: 1px solid #e5e5e5;
     font-size: 1.3rem;
     padding: 1rem 2rem;
 }
