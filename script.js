@@ -12,12 +12,19 @@ form.addEventListener('submit', (e) => {
         todoList.appendChild(todos);
         input.value = '';
     }
-    // markCompleted(todo);
+    markCompleted(todo);
+    removeList(todo);
 });
 
-// const markCompleted = (todo) => {
-//     todoList.addEventListener('click', (e) => {
-//         const complete = e.target;
-//         complete.classList.add('completed');
-//     });
-// }
+const markCompleted = (todo) => {
+    todoList.addEventListener('click', (e) => {
+        e.target.classList.toggle('completed');
+    });
+}
+
+const removeList = (todo) => {
+    todoList.addEventListener('contextmenu', (e) => {
+        e.preventDefault();
+        todoList.removeChild(e.target);
+    })
+}
