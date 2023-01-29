@@ -4,22 +4,63 @@ const todoList = document.querySelector('.todo-list');
 
 form.addEventListener('submit', (e) => {
     e.preventDefault();
+    addList();
+});
 
-    const todo = input.value;
+const addList = (list) => {
+    let todos = input.value;
 
-    if(todo) {
-        const todos = document.createElement('li');
-        todos.innerText = todo;
-        todoList.appendChild(todos);
+    if(list) {
+        todos = list.text;
+    }
+
+    if(todos) {
+        const todo = document.createElement('li');
+        
+        if(list && list.completed) {
+            todo.classList.add('completed');
+        }
+
+        todo.innerText = todos;
+        todoList.appendChild(todo);
         input.value = '';
 
-        todos.addEventListener('click', () => {
-            todos.classList.toggle('completed');
+        todo.addEventListener('click', () => {
+            todo.classList.toggle('completed');
+            saveHistory();
         });
 
-        todos.addEventListener('contextmenu', (e) => {
+        todo.addEventListener('contextmenu', (e) => {
             e.preventDefault();
-            todos.remove();     // todoList.removeChild(e.target);
+            todo.remove();     // todoList.removeChild(e.target);
+            saveHistory();
         });
+
+        saveHistory();
     }
-});
+}
+
+const saveHistory = () => {
+    const todosEl = document.querySelectorAll('li');
+    const storage = [];
+
+    todosEl.forEach((todoEl) => {
+        storage.push({
+            text : todoEl.innerText,
+            completed : todoEl.classList.contains('completed'),
+        });
+    });
+
+    // Sending data to web server, data has to be string
+    // JSON.stringify() -> convert object into string
+    localStorage.setItem('storage', JSON.stringify(storage));
+}
+
+// JSON.parse() -> constructing value or object from string
+const storageLists = JSON.parse(localStorage.getItem('storage'));
+
+if (storageLists) {
+    storageLists.forEach((storageList) => {
+        addList(storageList);
+    });
+}

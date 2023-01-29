@@ -50,6 +50,10 @@ form {
     color: #b5b5b5;
 }
 
+.input:focus.input::placeholder {
+    visibility: hidden;
+}
+
 .todo-list {
     list-style-type: none;
     margin: 0;
