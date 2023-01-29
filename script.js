@@ -10,13 +10,16 @@ form.addEventListener('submit', (e) => {
 const addList = (list) => {
     let todos = input.value;
 
+    // Jika ada list dari storage maka todos = text list
     if(list) {
         todos = list.text;
     }
 
+    // Nilai todos disini bisa dari list dan input.value
     if(todos) {
         const todo = document.createElement('li');
         
+        // Jika terdapat storage list dan properti completed nya true
         if(list && list.completed) {
             todo.classList.add('completed');
         }
