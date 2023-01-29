@@ -1,4 +1,5 @@
 const form = document.getElementById('form');
+const input = document.getElementById('input');
 const todoList = document.querySelector('.todo-list');
 
 form.addEventListener('submit', (e) => {
@@ -8,23 +9,17 @@ form.addEventListener('submit', (e) => {
 
     if(todo) {
         const todos = document.createElement('li');
-        todos.innerHTML = todo;
+        todos.innerText = todo;
         todoList.appendChild(todos);
         input.value = '';
+
+        todos.addEventListener('click', () => {
+            todos.classList.toggle('completed');
+        });
+
+        todos.addEventListener('contextmenu', (e) => {
+            e.preventDefault();
+            todos.remove();     // todoList.removeChild(e.target);
+        });
     }
-    markCompleted(todo);
-    removeList(todo);
 });
-
-const markCompleted = (todo) => {
-    todoList.addEventListener('click', (e) => {
-        e.target.classList.toggle('completed');
-    });
-}
-
-const removeList = (todo) => {
-    todoList.addEventListener('contextmenu', (e) => {
-        e.preventDefault();
-        todoList.removeChild(e.target);
-    })
-}
